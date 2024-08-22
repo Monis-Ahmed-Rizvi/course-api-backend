@@ -1,18 +1,12 @@
 package com.example.courseapi.dto;
 
-import java.util.List;
-
-public class CourseDTO {
+public class SimplifiedCourseDTO {
     private Long id;
     private String title;
     private String courseCode;
     private String description;
-    private List<CourseInstanceDTO> instances;
 
-    // Constructors
-    public CourseDTO() {}
-
-    public CourseDTO(Long id, String title, String courseCode, String description) {
+    public SimplifiedCourseDTO(Long id, String title, String courseCode, String description) {
         this.id = id;
         this.title = title;
         this.courseCode = courseCode;
@@ -20,6 +14,7 @@ public class CourseDTO {
     }
 
     // Getters and setters
+
     public Long getId() {
         return id;
     }
@@ -50,13 +45,5 @@ public class CourseDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<CourseInstanceDTO> getInstances() {
-        return instances;
-    }
-
-    public void setInstances(List<CourseInstanceDTO> instances) {
-        this.instances = instances;
     }
 }

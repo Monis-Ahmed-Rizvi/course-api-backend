@@ -1,5 +1,6 @@
 package com.example.courseapi.controller;
 
+import com.example.courseapi.dto.CourseDTO;
 import com.example.courseapi.model.Course;
 import com.example.courseapi.model.CourseInstance;
 import com.example.courseapi.service.CourseService;
@@ -17,26 +18,26 @@ public class CourseController {
     private CourseService courseService;
 
     @GetMapping
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseService.getAllCourses();
+    public ResponseEntity<List<CourseDTO>> getAllCourses() {
+        List<CourseDTO> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-        Course course = courseService.getCourseById(id);
+    public ResponseEntity<CourseDTO> getCourseById(@PathVariable Long id) {
+        CourseDTO course = courseService.getCourseById(id);
         return ResponseEntity.ok(course);
     }
 
     @PostMapping
-    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-        Course newCourse = courseService.createCourse(course);
+    public ResponseEntity<CourseDTO> createCourse(@RequestBody Course course) {
+        CourseDTO newCourse = courseService.createCourse(course);
         return ResponseEntity.ok(newCourse);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
-        Course updatedCourse = courseService.updateCourse(id, courseDetails);
+    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
+        CourseDTO updatedCourse = courseService.updateCourse(id, courseDetails);
         return ResponseEntity.ok(updatedCourse);
     }
 

@@ -1,11 +1,11 @@
 package com.example.courseapi.service;
 
-import com.example.courseapi.model.CourseInstance;
-
+import com.example.courseapi.dto.CourseInstanceDTO;
 import java.util.List;
 
 public interface CourseInstanceService {
-    List<CourseInstance> getCourseInstancesByYearAndSemester(int year, int semester);
-    CourseInstance getCourseInstanceByYearSemesterAndCourseId(int year, int semester, Long courseId);
-    void deleteCourseInstanceByYearSemesterAndCourseId(int year, int semester, Long courseId);
+    List<CourseInstanceDTO> getCourseInstancesByYearAndSemester(int year, int semester);
+    CourseInstanceDTO getCourseInstanceById(Long id);
+    CourseInstanceDTO getCourseInstanceByYearSemesterAndCourseId(int year, int semester, Long courseId);
+    void deleteCourseInstance(Long id);
 }

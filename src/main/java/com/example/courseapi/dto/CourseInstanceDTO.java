@@ -2,16 +2,33 @@ package com.example.courseapi.dto;
 
 public class CourseInstanceDTO {
     private Long id;
+    private int year;
     private int semester;
-    private int academicYear;
+    private SimplifiedCourseDTO course;
 
-    // Getters and Setters
+    public CourseInstanceDTO(Long id, int year, int semester, SimplifiedCourseDTO course) {
+        this.id = id;
+        this.year = year;
+        this.semester = semester;
+        this.course = course;
+    }
+
+    // Getters and setters
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public int getSemester() {
@@ -22,11 +39,11 @@ public class CourseInstanceDTO {
         this.semester = semester;
     }
 
-    public int getAcademicYear() {
-        return academicYear;
+    public SimplifiedCourseDTO getCourse() {
+        return course;
     }
 
-    public void setAcademicYear(int academicYear) {
-        this.academicYear = academicYear;
+    public void setCourse(SimplifiedCourseDTO course) {
+        this.course = course;
     }
 }

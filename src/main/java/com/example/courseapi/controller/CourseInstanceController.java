@@ -1,6 +1,6 @@
 package com.example.courseapi.controller;
 
-import com.example.courseapi.model.CourseInstance;
+import com.example.courseapi.dto.CourseInstanceDTO;
 import com.example.courseapi.service.CourseInstanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +16,28 @@ public class CourseInstanceController {
     private CourseInstanceService courseInstanceService;
 
     @GetMapping("/{year}/{semester}")
-    public ResponseEntity<List<CourseInstance>> getCourseInstancesByYearAndSemester(
+    public ResponseEntity<List<CourseInstanceDTO>> getCourseInstancesByYearAndSemester(
             @PathVariable int year, @PathVariable int semester) {
-        List<CourseInstance> instances = courseInstanceService.getCourseInstancesByYearAndSemester(year, semester);
+        List<CourseInstanceDTO> instances = courseInstanceService.getCourseInstancesByYearAndSemester(year, semester);
         return ResponseEntity.ok(instances);
     }
 
-    @GetMapping("/{year}/{semester}/{courseId}")
-    public ResponseEntity<CourseInstance> getCourseInstanceByYearSemesterAndCourseId(
-            @PathVariable int year, @PathVariable int semester, @PathVariable Long courseId) {
-        CourseInstance instance = courseInstanceService.getCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+    @GetMapping("/{id}")
+    public ResponseEntity<CourseInstanceDTO> getCourseInstanceById(@PathVariable Long id) {
+        CourseInstanceDTO instance = courseInstanceService.getCourseInstanceById(id);
         return ResponseEntity.ok(instance);
     }
 
-    @DeleteMapping("/{year}/{semester}/{courseId}")
-    public ResponseEntity<?> deleteCourseInstance(
+    @GetMapping("/{year}/{semester}/{courseId}")
+    public ResponseEntity<CourseInstanceDTO> getCourseInstanceByYearSemesterAndCourseId(
             @PathVariable int year, @PathVariable int semester, @PathVariable Long courseId) {
-        courseInstanceService.deleteCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+        CourseInstanceDTO instance = courseInstanceService.getCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+        return ResponseEntity.ok(instance);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCourseInstance(@PathVariable Long id) {
+        courseInstanceService.deleteCourseInstance(id);
         return ResponseEntity.ok().build();
     }
 }
