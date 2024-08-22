@@ -1,7 +1,10 @@
 package com.example.courseapi.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +15,15 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title is required")
+    @Size(max = 255, message = "Title must be less than 255 characters")
     private String title;
+
+    @NotBlank(message = "Course code is required")
+    @Size(max = 20, message = "Course code must be less than 20 characters")
     private String courseCode;
+
+    @Size(max = 1000, message = "Description must be less than 1000 characters")
     private String description;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

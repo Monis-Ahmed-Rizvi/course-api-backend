@@ -2,12 +2,12 @@ package com.example.courseapi.controller;
 
 import com.example.courseapi.dto.CourseDTO;
 import com.example.courseapi.model.Course;
-import com.example.courseapi.model.CourseInstance;
 import com.example.courseapi.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,6 +16,12 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @PostMapping
+    public ResponseEntity<CourseDTO> createCourse(@Valid @RequestBody Course course) {
+        CourseDTO newCourse = courseService.createCourse(course);
+        return ResponseEntity.status(201).body(newCourse);
+    }
 
     @GetMapping
     public ResponseEntity<List<CourseDTO>> getAllCourses() {
@@ -29,27 +35,16 @@ public class CourseController {
         return ResponseEntity.ok(course);
     }
 
-    @PostMapping
-    public ResponseEntity<CourseDTO> createCourse(@RequestBody Course course) {
-        CourseDTO newCourse = courseService.createCourse(course);
-        return ResponseEntity.ok(newCourse);
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
-        CourseDTO updatedCourse = courseService.updateCourse(id, courseDetails);
+    public ResponseEntity<CourseDTO> updateCourse(@PathVariable Long id, @Valid @RequestBody Course course) {
+        CourseDTO updatedCourse = courseService.updateCourse(id, course);
         return ResponseEntity.ok(updatedCourse);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourse(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping("/{courseId}/instances")
-    public ResponseEntity<CourseInstance> addCourseInstance(@PathVariable Long courseId, @RequestBody CourseInstance courseInstance) {
-        CourseInstance newInstance = courseService.addCourseInstance(courseId, courseInstance);
-        return ResponseEntity.ok(newInstance);
+        return ResponseEntity.noContent().build();
     }
 }
+
