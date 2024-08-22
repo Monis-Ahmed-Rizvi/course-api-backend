@@ -22,15 +22,17 @@ public class CourseInstanceController {
         return ResponseEntity.ok(instances);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<CourseInstance> getCourseInstanceById(@PathVariable Long id) {
-        CourseInstance instance = courseInstanceService.getCourseInstanceById(id);
+    @GetMapping("/{year}/{semester}/{courseId}")
+    public ResponseEntity<CourseInstance> getCourseInstanceByYearSemesterAndCourseId(
+            @PathVariable int year, @PathVariable int semester, @PathVariable Long courseId) {
+        CourseInstance instance = courseInstanceService.getCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
         return ResponseEntity.ok(instance);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCourseInstance(@PathVariable Long id) {
-        courseInstanceService.deleteCourseInstance(id);
+    @DeleteMapping("/{year}/{semester}/{courseId}")
+    public ResponseEntity<?> deleteCourseInstance(
+            @PathVariable int year, @PathVariable int semester, @PathVariable Long courseId) {
+        courseInstanceService.deleteCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
         return ResponseEntity.ok().build();
     }
 }

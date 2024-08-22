@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CourseInstanceService {
     List<CourseInstance> getCourseInstancesByYearAndSemester(int year, int semester);
-    CourseInstance getCourseInstanceById(Long id);
-    void deleteCourseInstance(Long id);
+    CourseInstance getCourseInstanceByYearSemesterAndCourseId(int year, int semester, Long courseId);
+    void deleteCourseInstanceByYearSemesterAndCourseId(int year, int semester, Long courseId);
 }
