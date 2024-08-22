@@ -55,4 +55,17 @@ public class CourseInstanceServiceImpl implements CourseInstanceService {
     public List<CourseInstance> getCourseInstancesByYearAndSemester(Integer year, Integer semester) {
         return courseInstanceRepository.findByYearAndSemester(year, semester);
     }
+
+    @Override
+    public CourseInstance getCourseInstanceByYearSemesterAndCourseId(Integer year, Integer semester, Long courseId) {
+        return courseInstanceRepository.findByYearAndSemesterAndCourseId(year, semester, courseId)
+                .orElseThrow(() -> new ResourceNotFoundException("CourseInstance not found"));
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseInstanceByYearSemesterAndCourseId(Integer year, Integer semester, Long courseId) {
+        CourseInstance instance = getCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+        courseInstanceRepository.delete(instance);
+    }
 }

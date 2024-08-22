@@ -10,4 +10,6 @@ public interface CourseInstanceService {
     CourseInstance updateCourseInstance(Long id, CourseInstance courseInstanceDetails);
     void deleteCourseInstance(Long id);
     List<CourseInstance> getCourseInstancesByYearAndSemester(Integer year, Integer semester);
+    CourseInstance getCourseInstanceByYearSemesterAndCourseId(Integer year, Integer semester, Long courseId);
+    void deleteCourseInstanceByYearSemesterAndCourseId(Integer year, Integer semester, Long courseId);
 }

@@ -48,7 +48,23 @@ public class CourseInstanceController {
     }
 
     @GetMapping("/{year}/{semester}")
-    public List<CourseInstance> getCourseInstancesByYearAndSemester(@PathVariable Integer year, @PathVariable Integer semester) {
-        return courseInstanceService.getCourseInstancesByYearAndSemester(year, semester);
+    public ResponseEntity<List<CourseInstance>> getCourseInstancesByYearAndSemester(
+            @PathVariable Integer year, @PathVariable Integer semester) {
+        List<CourseInstance> instances = courseInstanceService.getCourseInstancesByYearAndSemester(year, semester);
+        return ResponseEntity.ok(instances);
+    }
+
+    @GetMapping("/{year}/{semester}/{courseId}")
+    public ResponseEntity<CourseInstance> getCourseInstanceByYearSemesterAndCourseId(
+            @PathVariable Integer year, @PathVariable Integer semester, @PathVariable Long courseId) {
+        CourseInstance instance = courseInstanceService.getCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+        return ResponseEntity.ok(instance);
+    }
+
+    @DeleteMapping("/{year}/{semester}/{courseId}")
+    public ResponseEntity<?> deleteCourseInstance(
+            @PathVariable Integer year, @PathVariable Integer semester, @PathVariable Long courseId) {
+        courseInstanceService.deleteCourseInstanceByYearSemesterAndCourseId(year, semester, courseId);
+        return ResponseEntity.ok().build();
     }
 }
