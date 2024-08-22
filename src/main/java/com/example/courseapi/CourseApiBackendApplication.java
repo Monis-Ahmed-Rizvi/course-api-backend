@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class CourseApiBackendApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(CourseApiBackendApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(CourseApiBackendApplication.class, args);
+    }
 }

@@ -1,39 +1,83 @@
 package com.example.courseapi.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "courses")
 public class Course {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Size(max = 100)
-    @Column(unique = true)
     private String title;
-
-    @NotBlank
-    @Size(max = 20)
-    @Column(unique = true)
     private String courseCode;
-
-    @Size(max = 500)
     private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<CourseInstance> instances = new ArrayList<>();
+
+    // Constructors
+    public Course() {}
+
+    public Course(String title, String courseCode, String description) {
+        this.title = title;
+        this.courseCode = courseCode;
+        this.description = description;
+    }
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<CourseInstance> getInstances() {
+        return instances;
+    }
+
+    public void setInstances(List<CourseInstance> instances) {
+        this.instances = instances;
+    }
+
+    // Helper methods
+    public void addInstance(CourseInstance instance) {
+        instances.add(instance);
+        instance.setCourse(this);
+    }
+
+    public void removeInstance(CourseInstance instance) {
+        instances.remove(instance);
+        instance.setCourse(null);
+    }
 }

@@ -9,7 +9,7 @@ public interface CourseService {
     List<Course> getAllCourses();
     Course getCourseById(Long id);
     Course createCourse(Course course);
-    Course updateCourse(Long id, Course courseDetails);
+    Course updateCourse(Long id, Course course);
     void deleteCourse(Long id);
-    Course addCourseInstance(Long courseId, CourseInstance courseInstance);
+    CourseInstance addCourseInstance(Long courseId, CourseInstance courseInstance);
 }
