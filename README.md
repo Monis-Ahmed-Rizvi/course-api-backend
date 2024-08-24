@@ -1,88 +1,81 @@
-# Course API Backend
+# Course Management System Backend
 
-This is the backend for the Course API project, developed using Spring Boot.
-
-## Project Overview
-
-This API provides functionality to manage courses and course instances in an educational system. It allows for creating, reading, updating, and deleting courses, as well as managing course instances for specific years and semesters.
+This is the backend application for the Course Management System, built with Spring Boot.
 
 ## Features
 
 - RESTful API for managing courses and course instances
-- CRUD operations for courses
-- Management of course delivery instances
-- Validation of input data
-- Error handling and appropriate HTTP status codes
+- CRUD operations for courses and course instances
+- Pagination, sorting, and searching for courses
+- H2 in-memory database for development
+- Exception handling and validation
 
-## Tech Stack
+## Prerequisites
 
-- Java 17
-- Spring Boot 3.3.2
-- Spring Data JPA
-- H2 Database (for development)
-- Maven for dependency management and building the project
+- Java 17 or later
+- Maven 3.6 or later
 
-## Setup
+## Installation
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/course-api-backend.git
+   git clone https://github.com/your-username/course-management-backend.git
+   cd course-management-backend
    ```
-2. Navigate to the project directory:
-   ```
-   cd course-api-backend
-   ```
-3. Build the project:
+
+2. Build the project:
    ```
    mvn clean install
    ```
-4. Run the application:
-   ```
-   mvn spring-boot:run
-   ```
 
-The application will start running at `http://localhost:8081`.
+## Running the Application
+
+To start the application:
+
+```
+mvn spring-boot:run
+```
+
+The API will be available at `http://localhost:8081`.
 
 ## API Endpoints
 
-### Courses
+- `GET /api/courses`: List all courses (with pagination, sorting, and search)
+- `POST /api/courses`: Create a new course
+- `GET /api/courses/{id}`: Get a specific course
+- `PUT /api/courses/{id}`: Update a course
+- `DELETE /api/courses/{id}`: Delete a course
+- `GET /api/instances/{year}/{semester}`: List course instances for a specific year and semester
+- `POST /api/instances`: Create a new course instance
+- `DELETE /api/instances/{year}/{semester}/{courseId}`: Delete a course instance
 
-- `POST /api/courses` - Create a new course
-- `GET /api/courses` - List all courses
-- `GET /api/courses/{id}` - Get details of a specific course
-- `PUT /api/courses/{id}` - Update a course
-- `DELETE /api/courses/{id}` - Delete a course
+## Project Structure
 
-### Course Instances
+- `src/main/java/com/example/courseapi/`: Java source files
+  - `config/`: Configuration classes
+  - `controller/`: REST controllers
+  - `dto/`: Data Transfer Objects
+  - `exception/`: Custom exceptions and exception handling
+  - `model/`: Entity classes
+  - `repository/`: JPA repositories
+  - `service/`: Service layer classes
 
-- `POST /api/courses/{courseId}/instances` - Add a new instance to a course
-- `POST /api/instances` - Create a new course instance
-- `GET /api/instances/{year}/{semester}` - List courses delivered in a specific year and semester
-- `GET /api/instances/{year}/{semester}/{courseId}` - Get details of a specific course instance
-- `DELETE /api/instances/{year}/{semester}/{courseId}` - Delete a specific course instance
+## Database
 
-## Data Models
-
-### Course
-- `id`: Long
-- `title`: String
-- `courseCode`: String
-- `description`: String
-
-### CourseInstance
-- `id`: Long
-- `course`: Course
-- `year`: Integer
-- `semester`: Integer
+The application uses an H2 in-memory database by default. You can access the H2 console at `http://localhost:8081/h2-console` when the application is running.
 
 ## Testing
 
-You can use tools like Postman to test the API endpoints. Make sure to set the appropriate HTTP method and include the required data in the request body for POST and PUT requests.
+To run the tests:
+
+```
+mvn test
+```
 
 ## Contributing
 
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
