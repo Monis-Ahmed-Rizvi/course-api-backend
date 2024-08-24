@@ -39,6 +39,27 @@ The API will be available at `http://localhost:8081`.
 
 ### Docker Deployment
 
+This repository includes a `docker-compose.yaml` file for running both the frontend and backend services. However, please note that this file assumes a specific directory structure:
+
+```
+parent-directory/
+├── course-api-frontend/
+└── course-api-backend/
+```
+
+To use Docker Compose:
+
+1. Ensure you have both the frontend and backend repositories cloned as sibling directories.
+2. Navigate to the parent directory containing both repos.
+3. Run:
+   ```
+   docker-compose -f course-api-backend/docker-compose.yaml up
+   ```
+
+This will pull the Docker images from DockerHub and run both services.
+
+If you only want to run the backend service:
+
 1. Build the Docker image:
    ```
    docker build -t course-api-backend .
@@ -49,24 +70,16 @@ The API will be available at `http://localhost:8081`.
    docker run -p 8081:8081 course-api-backend
    ```
 
+Alternatively, you can pull the pre-built image from DockerHub:
+
+```
+docker pull moinsahmedrizvi/course-api-backend:latest
+docker run -p 8081:8081 moinsahmedrizvi/course-api-backend:latest
+```
+
 ## API Endpoints
 
-- `POST /api/courses`: Create a new course
-- `GET /api/courses`: List all courses
-- `GET /api/courses/{id}`: Get a specific course
-- `DELETE /api/courses/{id}`: Delete a course
-- `POST /api/instances`: Create a new course instance
-- `GET /api/instances/{year}/{semester}`: List course instances for a specific year and semester
-- `GET /api/instances/{year}/{semester}/{courseId}`: Get a specific course instance
-- `DELETE /api/instances/{year}/{semester}/{courseId}`: Delete a course instance
-
-## Docker Compose
-
-To run both the frontend and backend together, use the `docker-compose.yaml` file in the root of this repository:
-
-```
-docker-compose up
-```
+[List your API endpoints here]
 
 ## Contributing
 
