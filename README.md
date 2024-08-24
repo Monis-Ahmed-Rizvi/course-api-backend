@@ -79,7 +79,62 @@ docker run -p 8081:8081 moinsahmedrizvi/course-api-backend:latest
 
 ## API Endpoints
 
-[List your API endpoints here]
+### Courses
+
+1. Create a new course
+   - POST /api/courses
+   - Request body: Course object
+
+2. List all courses
+   - GET /api/courses
+
+3. View detailed information about a course
+   - GET /api/courses/{id}
+   - Example: GET /api/courses/23
+
+4. Update a course
+   - PUT /api/courses/{id}
+   - Request body: Updated Course object
+
+5. Delete a course
+   - DELETE /api/courses/{id}
+   - Example: DELETE /api/courses/24
+
+### Course Instances
+
+1. Create a new instance of a course delivery
+   - POST /api/instances
+   - Request body: CourseInstance object
+
+2. Create a new instance for a specific course
+   - POST /api/courses/{courseId}/instances
+   - Request body: CourseInstance object
+
+3. List course instances for a specific year and semester
+   - GET /api/instances/{year}/{semester}
+   - Example: GET /api/instances/2020/1
+
+4. View detailed information about a course instance
+   - GET /api/instances/{year}/{semester}/{courseId}
+   - Example: GET /api/instances/2023/1/19
+
+5. Delete a course instance
+   - DELETE /api/instances/{year}/{semester}/{courseId}
+   - Example: DELETE /api/instances/2022/2/8
+
+## Data Models
+
+### Course
+- id: Long
+- title: String
+- courseCode: String
+- description: String
+
+### CourseInstance
+- id: Long
+- year: int
+- semester: int
+- course: Course
 
 ## Contributing
 
