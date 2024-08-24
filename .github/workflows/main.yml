@@ -31,5 +31,5 @@ jobs:
       - name: Push image to Docker Hub
         run: |
           docker push moinsahmedrizvi/course-api-backend:$(date +%s)
-          docker tag moinsahmedrizvi/course-api-backend:$(date +%s) your-dockerhub-username/course-api-backend:latest
+          docker tag moinsahmedrizvi/course-api-backend:$(date +%s) moinsahmedrizvi/course-api-backend:latest
           docker push moinsahmedrizvi/course-api-backend:latest
